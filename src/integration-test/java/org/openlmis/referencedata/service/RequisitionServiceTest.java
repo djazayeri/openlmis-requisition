@@ -53,7 +53,7 @@ public class RequisitionServiceTest {
   private Requisition requisition = new Requisition();
 
   @Before
-  public void setUp(){
+  public void setUp() {
     requisitionRepository.deleteAll();
     programRepository.deleteAll();
     periodRepository.deleteAll();
@@ -61,6 +61,24 @@ public class RequisitionServiceTest {
     scheduleRepository.deleteAll();
 
     createTestRequisition();
+  }
+
+  @Test
+  public void testTryDelete() {
+    requisition.setStatus(RequisitionStatus.INITIATED);
+    requisitionRepository.save(requisition);
+
+    boolean deleted = requisitionService.tryDelete(requisition);
+    Assert.assertTrue(deleted);
+  }
+
+  @Test
+  public void testTryDeleteBadStatus() {
+    requisition.setStatus(RequisitionStatus.SUBMITTED);
+    requisitionRepository.save(requisition);
+
+    boolean deleted = requisitionService.tryDelete(requisition);
+    Assert.assertFalse(deleted);
   }
 
   @Test

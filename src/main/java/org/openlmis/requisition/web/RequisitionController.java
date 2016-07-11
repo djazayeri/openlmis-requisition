@@ -14,12 +14,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RepositoryRestController
 public class RequisitionController {
@@ -52,14 +54,26 @@ public class RequisitionController {
         Requisition newRequisition = requisitionRepository.save(requisition);
         return new ResponseEntity<>(newRequisition, HttpStatus.CREATED);
       } else {
-        return new ResponseEntity(getRequisitionErrors(bindingResult), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(getRequisitionErrors(bindingResult), HttpStatus.BAD_REQUEST);
       }
+    }
+  }
+
+  @RequestMapping(value = "/requisitions/{id}", method = RequestMethod.DELETE)
+  public ResponseEntity<?> deleteRequisition(@PathVariable("id") UUID requisitionId) {
+    Requisition requisition = requisitionRepository.findOne(requisitionId);
+    boolean deleted = requisitionService.tryDelete(requisition);
+
+    if (deleted) {
+      return new ResponseEntity(HttpStatus.NO_CONTENT);
+    } else {
+      return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
   }
 
   /**
    * Skipping chosen requisition period.
-     */
+   */
   @RequestMapping(value = "/requisitions/skip", method = RequestMethod.POST)
   public ResponseEntity<?> skipRequisition(@RequestBody Requisition requisition) {
     boolean skipped = requisitionService.skip(requisition);
