@@ -40,6 +40,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
@@ -49,6 +50,7 @@ public class RequisitionControllerIntegrationTest {
   private static final String requisitionRepositoryName = "RequisitionRepositoryIntegrationTest";
   private static final String SUBMIT_URL = "http://localhost:8080/api/requisitions/submit";
   private static final String SKIP_URL = "http://localhost:8080/api/requisitions/skip";
+  private static final String DELETE_URL = "http://localhost:8080/api/requisitions/{id}";
 
 
   @Autowired
@@ -195,6 +197,29 @@ public class RequisitionControllerIntegrationTest {
     ResponseEntity<Requisition> result = restTemplate.postForEntity(
         SKIP_URL, entity, Requisition.class);
     Assert.assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
+  }
+
+  @Test
+  public void testDelete() {
+    UUID id = requisition.getId();
+    RestTemplate restTemplate = new RestTemplate();
+
+    requisition.setStatus(RequisitionStatus.INITIATED);
+    requisitionRepository.save(requisition);
+    restTemplate.delete(DELETE_URL, id);
+
+    boolean exists = requisitionRepository.exists(id);
+    Assert.assertFalse(exists);
+  }
+
+  @Test(expected = HttpClientErrorException.class)
+  public void testDeleteWithBadStatus() {
+    UUID id = requisition.getId();
+    RestTemplate restTemplate = new RestTemplate();
+
+    requisition.setStatus(RequisitionStatus.SUBMITTED);
+    requisitionRepository.save(requisition);
+    restTemplate.delete(DELETE_URL, id);
   }
 
   private void testSubmit() throws JsonProcessingException {

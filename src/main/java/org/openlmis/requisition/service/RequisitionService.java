@@ -25,7 +25,7 @@ public class RequisitionService {
       logger.debug("Delete failed - " + requisitionBadStatusMessage);
     } else {
       logger.debug("Requisition deleted");
-      requisitionRepository.delete(requisition.getId());
+      requisitionRepository.delete(requisition);
       return true;
     }
 
