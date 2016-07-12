@@ -1,11 +1,8 @@
 package org.openlmis.fulfillment.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.openlmis.referencedata.domain.BaseEntity;
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,22 +10,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Table(name = "orders_pod")
-@NoArgsConstructor
+@Table(name = "order_proof_of_deliveries")
 public class OrderProofOfDelivery extends BaseEntity {
 
     @OneToOne
-    @JoinColumn(name = "orderId", nullable = false)
+    @JoinColumn(name = "orderId")
     @Getter
     @Setter
     private Order order;
 
     @OneToMany(mappedBy = "orderProofOfDelivery")
     @Getter
-    private Set<OrderProofOfDeliveryLine> profOfDeliveryLineItems;
+    @Setter
+    private List<OrderProofOfDeliveryLine> profOfDeliveryLineItems;
 
     @Column
     @Getter
@@ -59,5 +56,4 @@ public class OrderProofOfDelivery extends BaseEntity {
     @Getter
     @Setter
     private Date receivedDate;
-
 }
