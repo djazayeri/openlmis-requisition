@@ -3,6 +3,7 @@ package org.openlmis.fulfillment.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.openlmis.referencedata.domain.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -17,7 +18,7 @@ import java.util.List;
 public class OrderProofOfDelivery extends BaseEntity {
 
     @OneToOne
-    @JoinColumn(name = "orderId")
+    @JoinColumn(name = "orderId", nullable = false)
     @Getter
     @Setter
     private Order order;
@@ -42,17 +43,17 @@ public class OrderProofOfDelivery extends BaseEntity {
     @Setter
     private Integer totalReturnedPacks;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(columnDefinition = "text")
     @Getter
     @Setter
     private String deliveredBy;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(columnDefinition = "text")
     @Getter
     @Setter
     private String receivedBy;
 
-    @Column(nullable = false)
+    @Column
     @Getter
     @Setter
     private Date receivedDate;

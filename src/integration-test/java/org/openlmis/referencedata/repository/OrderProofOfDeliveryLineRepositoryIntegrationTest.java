@@ -141,12 +141,6 @@ public class OrderProofOfDeliveryLineRepositoryIntegrationTest {
         OrderProofOfDeliveryLine orderProofOfDeliveryLine = new OrderProofOfDeliveryLine();
         orderProofOfDeliveryLine.setOrderLine(orderLine);
         orderProofOfDeliveryLine.setOrderProofOfDelivery(orderProofOfDelivery);
-        orderProofOfDeliveryLine.setPackToShip(1L);
-        orderProofOfDeliveryLine.setQuantityShipped(1L);
-        orderProofOfDeliveryLine.setQuantityReceived(1L);
-        orderProofOfDeliveryLine.setQuantityReturned(1L);
-        orderProofOfDeliveryLine.setReplacedProductCode(orderProofOfDeliveryLineString);
-        orderProofOfDeliveryLine.setNotes(orderProofOfDeliveryLineString);
 
         Assert.assertNull(orderProofOfDeliveryLine.getId());
 

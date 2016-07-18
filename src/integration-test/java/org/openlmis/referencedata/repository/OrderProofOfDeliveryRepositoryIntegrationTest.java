@@ -17,7 +17,6 @@ import org.openlmis.referencedata.domain.Program;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class OrderProofOfDeliveryRepositoryIntegrationTest extends
         BaseCrudRepositoryIntegrationTest<OrderProofOfDelivery> {
@@ -93,9 +92,6 @@ public class OrderProofOfDeliveryRepositoryIntegrationTest extends
     OrderProofOfDelivery generateInstance() {
         OrderProofOfDelivery orderProofOfDelivery = new OrderProofOfDelivery();
         orderProofOfDelivery.setOrder(order);
-        orderProofOfDelivery.setDeliveredBy(orderProofOfDeliveryString);
-        orderProofOfDelivery.setReceivedBy(orderProofOfDeliveryString);
-        orderProofOfDelivery.setReceivedDate(new Date());
         return orderProofOfDelivery;
     }
 }

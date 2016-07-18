@@ -26,32 +26,32 @@ public class OrderProofOfDeliveryLine extends BaseEntity {
     @Setter
     private OrderProofOfDelivery orderProofOfDelivery;
 
-    @Column(nullable = false)
+    @Column
     @Getter
     @Setter
     private Long packToShip;
 
-    @Column(nullable = false)
+    @Column
     @Getter
     @Setter
     private Long quantityShipped;
 
-    @Column(nullable = false)
+    @Column
     @Getter
     @Setter
     private Long quantityReceived;
 
-    @Column(nullable = false)
+    @Column
     @Getter
     @Setter
     private Long quantityReturned;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(columnDefinition = "text")
     @Getter
     @Setter
     private String replacedProductCode;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(columnDefinition = "text")
     @Getter
     @Setter
     private String notes;
