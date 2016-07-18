@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "stockInventories", schema = "referencedata")
 @NoArgsConstructor
-public class StockInventory extends BaseEntity{
+public class StockInventory extends BaseEntity {
 
   @Column(nullable = false)
   @Getter

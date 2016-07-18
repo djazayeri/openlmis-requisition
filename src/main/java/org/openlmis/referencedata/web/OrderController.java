@@ -20,13 +20,13 @@ import java.util.UUID;
 
 @RepositoryRestController
 public class OrderController {
-  Logger logger = LoggerFactory.getLogger(OrderController.class);
+  private Logger logger = LoggerFactory.getLogger(OrderController.class);
 
   @Autowired
-  StockRepository stockRepository;
+  private StockRepository stockRepository;
 
   @Autowired
-  OrderRepository orderRepository;
+  private OrderRepository orderRepository;
 
   /**
    * Allows finalizing orders.
@@ -42,7 +42,7 @@ public class OrderController {
     Order order = orderRepository.findOne(orderId);
 
     if (order == null) {
-      return new ResponseEntity<>("Error: Null order.", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     } else {
       for (OrderLine orderLine : order.getOrderLines()) {
         //Searching for a corresponding stock to the current orderline
@@ -70,8 +70,8 @@ public class OrderController {
 
       logger.debug("Finalizing the order");
 
-      //OLMIS-240.3: "Once finalized has been selected
-      //all commodities are subtracted from inventory at the warehouse"
+      /*Once finalized has been selected all commodities are subtracted
+        from inventory at the warehouse*/
       for (OrderLine orderLine : order.getOrderLines()) {
         Stock stock = stockRepository.findByStockInventoryAndProduct(
             order.getSupplyingFacility().getStockInventory(),
@@ -83,7 +83,7 @@ public class OrderController {
         stockRepository.save(stock);
       }
 
-      //OLMIS-240.5: Changes order status to "Shipped"
+      //Changing order status to "Shipped"
       order.setStatus(OrderStatus.SHIPPED);
       orderRepository.save(order);
 

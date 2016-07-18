@@ -5,16 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.openlmis.product.domain.Product;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "stocks")
+@Table(name = "stocks", schema = "referencedata")
 @NoArgsConstructor
-public class Stock extends BaseEntity{
+public class Stock extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "stockInventoryId", nullable = false)
@@ -28,7 +27,6 @@ public class Stock extends BaseEntity{
   @Setter
   private Product product;
 
-  @Column
   @Getter
   @Setter
   private Long storedQuantity;

@@ -7,13 +7,13 @@ public class StockInventoryRepositoryIntegrationTest
     extends BaseCrudRepositoryIntegrationTest<StockInventory> {
 
   @Autowired
-  StockInventoryRepository stockInventoryRepository;
+  private StockInventoryRepository stockInventoryRepository;
 
-  StockInventoryRepository getRepository() {
+  public StockInventoryRepository getRepository() {
     return this.stockInventoryRepository;
   }
 
-  StockInventory generateInstance() {
+  public StockInventory generateInstance() {
     StockInventory stockInventory = new StockInventory();
     stockInventory.setName("stockInventoryName");
     return stockInventory;

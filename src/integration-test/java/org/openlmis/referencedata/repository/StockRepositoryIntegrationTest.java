@@ -12,18 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class StockRepositoryIntegrationTest extends BaseCrudRepositoryIntegrationTest<Stock> {
 
   @Autowired
-  StockRepository stockRepository;
+  private StockRepository stockRepository;
 
   @Autowired
-  StockInventoryRepository stockInventoryRepository;
+  private StockInventoryRepository stockInventoryRepository;
 
   @Autowired
-  ProductRepository productRepository;
+  private ProductRepository productRepository;
 
   private StockInventory stockInventory = new StockInventory();
   private Product product = new Product();
 
-  StockRepository getRepository() {
+  public StockRepository getRepository() {
     return this.stockRepository;
   }
 
@@ -47,7 +47,7 @@ public class StockRepositoryIntegrationTest extends BaseCrudRepositoryIntegratio
     productRepository.save(product);
   }
 
-  Stock generateInstance() {
+  public Stock generateInstance() {
     Stock stock = new Stock();
     stock.setStockInventory(stockInventory);
     stock.setProduct(product);

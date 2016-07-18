@@ -7,15 +7,15 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.openlmis.referencedata.domain.BaseEntity;
 import org.openlmis.product.domain.Product;
+import org.openlmis.referencedata.domain.BaseEntity;
 
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "order_lines")
@@ -39,24 +39,20 @@ public class OrderLine extends BaseEntity {
   @Setter
   private Long orderedQuantity;
 
-  @Column
   @Getter
   @Setter
   private String batch;
 
   @JsonSerialize(using = LocalDateSerializer.class)
   @JsonDeserialize(using = LocalDateDeserializer.class)
-  @Column
   @Getter
   @Setter
   private LocalDate expiryDate;
 
-  @Column
   @Getter
   @Setter
   private String vvm;
 
-  @Column
   @Getter
   @Setter
   private String manufacturer;

@@ -52,37 +52,37 @@ import java.time.LocalDate;
 public class OrderControllerIntegrationTest {
 
   @Autowired
-  FacilityRepository facilityRepository;
+  private FacilityRepository facilityRepository;
 
   @Autowired
-  FacilityTypeRepository facilityTypeRepository;
+  private FacilityTypeRepository facilityTypeRepository;
 
   @Autowired
-  GeographicLevelRepository geographicLevelRepository;
+  private GeographicLevelRepository geographicLevelRepository;
 
   @Autowired
-  GeographicZoneRepository geographicZoneRepository;
+  private GeographicZoneRepository geographicZoneRepository;
 
   @Autowired
-  OrderLineRepository orderLineRepository;
+  private OrderLineRepository orderLineRepository;
 
   @Autowired
-  OrderRepository orderRepository;
+  private OrderRepository orderRepository;
 
   @Autowired
-  ProductRepository productRepository;
+  private ProductRepository productRepository;
 
   @Autowired
-  ProgramRepository programRepository;
+  private ProgramRepository programRepository;
 
   @Autowired
-  UserRepository userRepository;
+  private UserRepository userRepository;
 
   @Autowired
-  StockRepository stockRepository;
+  private StockRepository stockRepository;
 
   @Autowired
-  StockInventoryRepository stockInventoryRepository;
+  private StockInventoryRepository stockInventoryRepository;
 
   private static final String RESOURCE_URL = "http://localhost:8080/api/orders/finalizeOrder";
 
@@ -101,16 +101,13 @@ public class OrderControllerIntegrationTest {
     GeographicLevel geographicLevel = new GeographicLevel();
     geographicLevel.setCode("geographicLevelCode");
     geographicLevel.setLevelNumber(1);
-    //geographicLevelRepository.save(geographicLevel);
 
     FacilityType facilityType = new FacilityType();
     facilityType.setCode("facilityTypeCode");
-    //facilityTypeRepository.save(facilityType);
 
     GeographicZone geographicZone = new GeographicZone();
     geographicZone.setCode("geographicZoneCode");
     geographicZone.setLevel(geographicLevel);
-    //geographicZoneRepository.save(geographicZone);
 
     Facility facility = new Facility();
     facility.setType(facilityType);
