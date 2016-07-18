@@ -83,7 +83,6 @@ public class OrderController {
         stockRepository.save(stock);
       }
 
-      //Changing order status to "Shipped"
       order.setStatus(OrderStatus.SHIPPED);
       orderRepository.save(order);
 

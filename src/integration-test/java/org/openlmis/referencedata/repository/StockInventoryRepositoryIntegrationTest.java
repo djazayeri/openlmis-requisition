@@ -9,11 +9,11 @@ public class StockInventoryRepositoryIntegrationTest
   @Autowired
   private StockInventoryRepository stockInventoryRepository;
 
-  public StockInventoryRepository getRepository() {
+  StockInventoryRepository getRepository() {
     return this.stockInventoryRepository;
   }
 
-  public StockInventory generateInstance() {
+  StockInventory generateInstance() {
     StockInventory stockInventory = new StockInventory();
     stockInventory.setName("stockInventoryName");
     return stockInventory;

@@ -23,7 +23,7 @@ public class StockRepositoryIntegrationTest extends BaseCrudRepositoryIntegratio
   private StockInventory stockInventory = new StockInventory();
   private Product product = new Product();
 
-  public StockRepository getRepository() {
+  StockRepository getRepository() {
     return this.stockRepository;
   }
 
@@ -47,7 +47,7 @@ public class StockRepositoryIntegrationTest extends BaseCrudRepositoryIntegratio
     productRepository.save(product);
   }
 
-  public Stock generateInstance() {
+  Stock generateInstance() {
     Stock stock = new Stock();
     stock.setStockInventory(stockInventory);
     stock.setProduct(product);
