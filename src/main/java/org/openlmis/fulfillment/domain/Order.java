@@ -11,6 +11,7 @@ import org.openlmis.hierarchyandsupervision.domain.User;
 import org.openlmis.referencedata.domain.BaseEntity;
 import org.openlmis.referencedata.domain.Facility;
 import org.openlmis.referencedata.domain.Program;
+import org.openlmis.requisition.domain.Requisition;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,9 +21,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -31,10 +34,11 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Order extends BaseEntity {
 
-  @Column(columnDefinition = "text")
+  @OneToOne
+  @JoinColumn(name = "requisitionId")
   @Getter
   @Setter
-  private String requisitionCode;
+  private Requisition requisition;
 
   @JsonSerialize(using = LocalDateTimeSerializer.class)
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -88,7 +92,8 @@ public class Order extends BaseEntity {
   @Setter
   private BigDecimal quotedCost;
 
-  @OneToMany(mappedBy = "order")
+  @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+  @Column
   @Getter
   private Set<OrderLine> orderLines;
 
